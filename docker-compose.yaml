@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"  # Web UI and API
+      - "9002:9002"  # Admin console
+    environment:
+      MINIO_ROOT_USER: minioadmin  # Replace with your preferred username
+      MINIO_ROOT_PASSWORD: minioadmin123  # Replace with your preferred password
+    volumes:
+      - minio-data:/data  # Persistent storage
+    command: server /data --console-address ":9002"
+    
+volumes:
+  minio-data:
